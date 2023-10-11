@@ -13,7 +13,7 @@ const getUser = async () => await currentUser();
 
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
-  imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 4 } })
+  media: f({ image: { maxFileSize: "4MB", maxFileCount: 4 } })
     // Set permissions and file types for this FileRoute
     .middleware(async (req) => {
       // This code runs on your server before upload
