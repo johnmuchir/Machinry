@@ -5,7 +5,7 @@ import Pagination from "@/components/shared/Pagination";
 import CommunityCard from "@/components/cards/CommunityCard";
 import { fetchCommunities } from "@/lib/actions/community.actions";
 import { fetchUser } from "@/lib/actions/user.action";
-import Searchbar from "@/components/shared/SearchBar";
+import Searchbar from "@/components/shared/Searchbar";
 
 async function Page({
   searchParams,
