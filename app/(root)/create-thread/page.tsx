@@ -1,3 +1,4 @@
+
 import PostThread from "@/components/forms/PostThread";
 import { fetchUser } from "@/lib/actions/user.action";
 import { currentUser } from "@clerk/nextjs";
@@ -18,8 +19,9 @@ async function Page() {
     return (
         <>
             <h1 className="head-text"></h1>
-
-            <PostThread userId={userInfo._id} />
+        
+        
+            <PostThread userId={userInfo._id}  />
         </>
     
     )

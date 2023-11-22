@@ -19,7 +19,7 @@ async function Page() {
         <section>
             <h1 className="head-text mb-10">Activity</h1>
 
-            <section className="mt-10 flex flex flex-col gap-5">
+            <section className="mt-10 flex flex-col gap-5">
                 {activity.length > 0 ? (
                     <>
                         {activity.map((activity) => (

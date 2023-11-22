@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 
 const threadSchema = new mongoose.Schema({
    text: { type: String, required: true },
+   images: [
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Image',
+    }
+   ],
    author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

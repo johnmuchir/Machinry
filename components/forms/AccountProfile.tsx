@@ -1,8 +1,11 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { usePathname, useRouter } from "next/navigation";
+import { ChangeEvent, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   Form,
@@ -13,15 +16,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { UserValidation } from "@/lib/validations/user";
 import { Button } from "@/components/ui/button";
-import { ChangeEvent, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
+
 import { useUploadThing } from "@/lib/uploadthing";
-import * as z from "zod";
 import { isBase64Image } from "@/lib/utils";
+
+import { UserValidation } from "@/lib/validations/user";
 import { updateUser } from "@/lib/actions/user.action";
-import { usePathname, useRouter } from "next/navigation";
 
 interface Props {
   user: {
@@ -34,13 +36,15 @@ interface Props {
   };
   btnTitle: string;
 }
+
 const AccountProfile = ({ user, btnTitle }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const { startUpload } = useUploadThing("media");
-  
+
   const [files, setFiles] = useState<File[]>([]);
-  const form = useForm({
+
+  const form = useForm<z.infer<typeof UserValidation>>({
     resolver: zodResolver(UserValidation),
     defaultValues: {
       profile_photo: user?.image ? user.image : "",
@@ -50,7 +54,38 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     },
   });
 
-  const handleImage = (e: ChangeEvent, fieldChange: (value: string) => void) => {
+  const onSubmit = async (values: z.infer<typeof UserValidation>) => {
+    const blob = values.profile_photo;
+
+    const hasImageChanged = isBase64Image(blob);
+    if (hasImageChanged) {
+      const imgRes = await startUpload(files);
+
+      if (imgRes && imgRes[0].fileUrl) {   // CHANGED
+        values.profile_photo = imgRes[0].fileUrl;
+      }
+    }
+
+    await updateUser({
+      username: values.username,
+      name: values.name,
+      bio: values.bio,
+      image: values.profile_photo, 
+      userId: user.id,
+      path: pathname,
+        
+    });
+    if (pathname === "/profile/edit") {
+      router.back();
+    } else {
+      router.push("/");
+    }
+  };
+
+  const handleImage = (
+    e: ChangeEvent<HTMLInputElement>,
+    fieldChange: (value: string) => void
+  ) => {
     e.preventDefault();
 
     const fileReader = new FileReader();
@@ -65,42 +100,13 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
         const imageDataUrl = event.target?.result?.toString() || "";
         fieldChange(imageDataUrl);
       };
+
       fileReader.readAsDataURL(file);
     }
-
   };
 
-
-  
-  const onSubmit = async (values: z.infer<typeof UserValidation>) => {
-    const blob = values.profile_photo;
-
-    const hasImageChanged = isBase64Image(blob);
-    if (hasImageChanged) {
-    const imgRes = await startUpload(files);
-    if (imgRes && imgRes[0].fileUrl) {
-      values.profile_photo = imgRes[0].fileUrl;
-    }
-
-  }
-  await updateUser({
-    name: values.name,
-    path: pathname,
-    username: values.username,
-    userId: user.id,
-    bio: values.bio,
-    image: values.profile_photo,
-  });
-  if (pathname === "/profile/edit") {
-    router.back();
-  } else {
-    router.push("/");
-  }
-  }
-  
-    
-    return (
-        <Form {...form}>
+  return (
+    <Form {...form}>
       <form
         className='flex flex-col justify-start gap-10'
         onSubmit={form.handleSubmit(onSubmit)}
@@ -114,7 +120,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                 {field.value ? (
                   <Image
                     src={field.value}
-                    alt='profile_icon'
+                    alt='profile_photo'
                     width={96}
                     height={96}
                     priority
@@ -123,7 +129,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                 ) : (
                   <Image
                     src='/assets/profile.svg'
-                    alt='profile_icon'
+                    alt='profile_photo'
                     width={24}
                     height={24}
                     className='object-contain'

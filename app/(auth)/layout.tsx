@@ -5,8 +5,8 @@ import "../globals.css";
 
 
 export const metadata = {
-    title: "Machinry",
-    description: "A Next.js 13 Meta Machinry Application"
+    title: "Machinary",
+    description: "A Next.js 13 Meta Machinary Application"
 }
 
 const inter = Inter({ subsets: ["latin"] });

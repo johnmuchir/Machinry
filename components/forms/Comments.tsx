@@ -51,7 +51,7 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
 
     return (
         <Form {...form}>
-        <form className='comment-form' onSubmit={form.handleSubmit(onSubmit)}>
+        <form className='comment-form text-dark-1' onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name='thread'
@@ -71,7 +71,7 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
                     type='text'
                     {...field}
                     placeholder='Comment...'
-                    className='no-focus text-light-1 outline-none'
+                    className='no-focus text-dark-1 outline-none'
                   />
                 </FormControl>
               </FormItem>

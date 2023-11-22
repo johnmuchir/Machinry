@@ -7,9 +7,25 @@ function Topbar() {
     return (
         <nav className="topbar">
             <Link href='/' className='flex items-center gap-1'>
-               <Image src='/assets/logo.png' alt='logo' width={60} height={60} className="rounded-lg" />
-               <p className='text-heading 3-bold text-light-1 max-xs:hidden'>Machinry</p>
+               <Image 
+                   src='/assets/pic 3.jpg' 
+                   alt='logo' 
+                   width={60}
+                   height={50}
+                   priority
+                   className="rounded-lg" 
+                />
+               <p className='text-heading 3-bold text-light-1 max-xs:hidden'>Machinary</p>
             </Link>
+
+            <OrganizationSwitcher
+                appearance={{
+                    baseTheme: dark,
+                    elements: {
+                        organizationSwitcherTrigger: "pt-2 px-2",
+                    },
+                }}
+            />
 
             <div className='flex items-center gap-1'>
                 <div className='block md:hidden'>
@@ -26,14 +42,7 @@ function Topbar() {
                     </SignOutButton>
                     </SignedIn>
                 </div>
-                <OrganizationSwitcher
-                    appearance={{
-                        baseTheme: dark,
-                        elements: {
-                            organizationSwitcherTrigger: "pt-2 px-2",
-                        },
-                    }}
-                />
+                
             </div>
         </nav>
 
