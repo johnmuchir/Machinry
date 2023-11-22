@@ -7,6 +7,7 @@ import { fetchCommunities } from "@/lib/actions/community.actions";
 import { fetchUser } from "@/lib/actions/user.action";
 import Searchbar from "@/components/shared/Searchbar";
 
+
 async function Page({
   searchParams,
 }: {
