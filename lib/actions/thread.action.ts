@@ -5,7 +5,6 @@ import { connectToDB } from "../moongose";
 import User from "../models/user.model";
 import Thread from "../models/thread.model";
 import Community from "../models/community.model";
-import image from "next/image";
 
 export async function fetchPosts(pageNumber = 1, pageSize = 20) {
   connectToDB();
@@ -236,12 +235,5 @@ export async function addCommentToThread(
     throw new Error("Unable to add comment");
   }
 }
-
-
-
-
-
-
-
 
 
