@@ -4,8 +4,7 @@ const threadSchema = new mongoose.Schema({
    text: { type: String, required: true },
    images: [
     {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Image',
+       type: String,
     }
    ],
    author: {

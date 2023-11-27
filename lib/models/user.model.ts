@@ -12,12 +12,6 @@ const userSchema = new mongoose.Schema({
             ref: 'Thread',
         }
     ],
-    images: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Image',
-        }
-    ],
     onboarded: {
         type: Boolean,
         default: false,

@@ -48,7 +48,7 @@ function Likes({ threadId, userId }: Props) {
     <div className={`flex items-center gap-1`}>
       <button onClick={handleLikeClick} className={`cursor-pointer focus:outline-none ${isLiked ? 'text-red-900' : 'text-gray-900'}`}>
         {/* You can replace the text with your heart icon */}
-        {isLiked ? '❤️' : '🤍'}
+        {isLiked ? '💙' : '🤍'}
       </button>
       <span className='text-subtle-medium text-light-3'>{likeCount}</span>
     </div>

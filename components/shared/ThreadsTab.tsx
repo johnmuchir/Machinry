@@ -12,6 +12,7 @@ interface Result {
   threads: {
     _id: string;
     text: string;
+    images:string;
     parentId: string | null;
     author: {
       name: string;
@@ -60,6 +61,7 @@ async function ThreadsTab({ currentUserId, accountId, accountType }: Props) {
           currentUserId={currentUserId}
           parentId={thread.parentId}
           content={thread.text}
+          images={thread.images}
           author={
             accountType === "User"
               ? { name: result.name, image: result.image, id: result.id }

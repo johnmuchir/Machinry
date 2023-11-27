@@ -11,6 +11,7 @@ interface Props {
   currentUserId: string;
   parentId: string | null;
   content: string;
+  images: string;
   author: {
     name: string;
     image: string;
@@ -36,6 +37,7 @@ function ThreadCard({
   currentUserId,
   parentId,
   content,
+  images,
   author,
   community,
   createdAt,
@@ -51,7 +53,7 @@ function ThreadCard({
       }`}
     >
       <div className='flex items-start justify-between'>
-        <div className='flex w-full flex-1 flex-col gap-2'>
+        <div className='flex w-full flex-1 flex-col gap-0'>
           <div className='flex items-center gap-2'>
             <Link href={`/profile/${author.id}`} className='relative h-11 w-11'>
               <Image
@@ -74,8 +76,17 @@ function ThreadCard({
           </div>
 
           <p className='mt-2 text-small-regular text-light-2'>{content}</p>
-
-          <div className={`${isComment && "mb-2"} mt-0 flex items-center gap-1`}>
+          {images && (
+            <img
+              src={images}
+              alt={""}
+              className="rounded-lg mt-2"
+        
+            />
+          )}
+ 
+ 
+          <div className={`${isComment && "mb-2"} mt-0 flex items-center gap-0`}>
             <div className='flex gap-4 mt-3 items-center'>
               
               <Likes threadId={JSON.stringify({})} userId={""} />

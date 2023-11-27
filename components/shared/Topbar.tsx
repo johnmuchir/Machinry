@@ -15,7 +15,7 @@ function Topbar() {
                    priority
                    className="rounded-lg" 
                 />
-               <p className='text-heading 3-bold text-light-1 max-xs:hidden'>Machinary</p>
+               <p className='cursor-pointer p-1 overflow-hidden text-[12px] rounded-lg bg-gradient-to-r from-pink-500 to-yellow-500 ... max-xs:hidden'>Machinary</p>
             </Link>
 
             <OrganizationSwitcher
