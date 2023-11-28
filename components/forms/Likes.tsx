@@ -1,56 +1,61 @@
 "use client"
 
-import { usePathname } from 'next/navigation';
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
-interface Props {
-  threadId: string;
-  userId: string;
-}
-
-function Likes({ threadId, userId }: Props) {
-  const pathname = usePathname();
-  
+function Likes() {
+  const [randomLikes, setRandomLikes] = useState(0);
+  const [randomViews, setRandomViews] = useState('');
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
-    // You might want to fetch the initial like status and count from the server
-    // For simplicity, let's assume you have this information available
-    // Fetch the initial like status and count here if needed
+    setRandomLikes(Math.floor(Math.random() * 500));
+    const generatedViews = (Math.floor(Math.random() * 1000) / 1000).toFixed(1);
+    setRandomViews(generatedViews !== "0.0" ? generatedViews + "k" : "");
+  }, []);
 
-    // Example:
-     const fetchData = async () => {
-    //   // Fetch like status and count from the server
-      //const { isLiked, likeCount } = await addLikeToThread(JSON.parse(threadId), pathname);
-      if (threadId !== null) {
-      setIsLiked(isLiked);
-       setLikeCount(likeCount);
-     };
-    
-     fetchData();
+  useEffect(() => {
+    if (isLiked) {
+      const delay = 3000; // Delay in milliseconds (adjust as needed)
+      const interval = setInterval(() => {
+        setRandomLikes((prevLikes) => prevLikes + 1);
+      }, delay);
+
+      // Clear the interval after 5 seconds (adjust as needed)
+      const timeout = setTimeout(() => {
+        clearInterval(interval);
+      }, 5000);
+
+      return () => {
+        clearInterval(interval);
+        clearTimeout(timeout);
+      };
     }
-  }, [threadId]);
+  }, [isLiked]);
 
   const handleLikeClick = async () => {
-    try {
-     
+    // You can add any asynchronous logic here if needed
 
-      // Update the local state to reflect the new like state
-      setIsLiked(true);
-      setLikeCount((prevCount) => prevCount + 1);
-    } catch (error) {
-      console.error(error);
-    }
+    // Simulate an asynchronous operation with a delay
+    setIsLiked(true);
+
+    // For demonstration purposes, you can remove the following line
+    // and handle the asynchronous logic inside the setIsLiked callback
+    // Reset the like state after 5 seconds (adjust as needed)
   };
 
   return (
-    <div className={`flex items-center gap-1`}>
-      <button onClick={handleLikeClick} className={`cursor-pointer focus:outline-none ${isLiked ? 'text-red-900' : 'text-gray-900'}`}>
+    <div className={`flex items-center gap-2`}>
+      <button onClick={handleLikeClick} className={`flex items-center cursor-pointer focus:outline-none ${isLiked ? 'text-red-900' : 'text-gray-900'}`}>
         {/* You can replace the text with your heart icon */}
         {isLiked ? '💙' : '🤍'}
+        <p className="text-subtle-medium text-gray-1">{randomLikes}</p>
       </button>
-      <span className='text-subtle-medium text-light-3'>{likeCount}</span>
+      
+      <div className="flex gap-1 text-subtle-medium text-gray-1">
+        Views
+        <p className="text-sm">{randomViews}</p>
+      </div>
+      
     </div>
   );
 }

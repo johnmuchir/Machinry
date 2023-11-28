@@ -30,6 +30,7 @@ interface Props {
     };
   }[];
   isComment?: boolean;
+  isLiked?: boolean;
 }
 
 function ThreadCard({
@@ -89,7 +90,7 @@ function ThreadCard({
           <div className={`${isComment && "mb-2"} mt-0 flex items-center gap-0`}>
             <div className='flex gap-4 mt-3 items-center'>
               
-              <Likes threadId={JSON.stringify({})} userId={""} />
+              <Likes />
               
               <Link href={`/thread/${id}`}>
                 <Image
