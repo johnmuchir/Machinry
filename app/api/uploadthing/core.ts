@@ -11,7 +11,7 @@ const getUser = async () => await currentUser();
 
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
-  media: f({ image: { maxFileSize: "8MB", maxFileCount: 2 } })
+  media: f({ image: { maxFileSize: "8MB", maxFileCount: 3 } })
     // Set permissions and file types for this FileRoute
     .middleware(async (req) => {
       // This code runs on your server before upload
@@ -29,7 +29,20 @@ export const ourFileRouter = {
 
       console.log("file url", file.url);
     }),
-     // Takes a 4 2mb images and/or 1 256mb video
+     // ADDED Takes a 4 2mb images and/or 1 256mb video
+     mediaPost: f({
+      image: { maxFileSize: "2MB", maxFileCount: 4 },
+      video: { maxFileSize: "8MB", maxFileCount: 1 },
+    })
+      .middleware(async (req) => {
+        const user = await getUser();
+        if (!user) throw new Error("Unauthorised");
+        return { userId: user.id };
+      }) 
+      .onUploadComplete(async ({ metadata, file }) => {
+        console.log("Upload complete for userId:", metadata.userId);
+        console.log("file url", file.url);
+      }),
   
 } satisfies FileRouter;
 

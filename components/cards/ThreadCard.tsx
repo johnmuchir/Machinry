@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThreads";
 import Likes from "../forms/Likes";
@@ -11,7 +10,8 @@ interface Props {
   currentUserId: string;
   parentId: string | null;
   content: string;
-  images: string;
+  images?: string[];
+  video?: string;
   author: {
     name: string;
     image: string;
@@ -39,6 +39,7 @@ function ThreadCard({
   parentId,
   content,
   images,
+  video,
   author,
   community,
   createdAt,
@@ -56,18 +57,18 @@ function ThreadCard({
       <div className='flex items-start justify-between'>
         <div className='flex w-full flex-1 flex-col gap-0'>
           <div className='flex items-center gap-2'>
-            <Link href={`/profile/${author.id}`} className='relative h-11 w-11'>
+            <Link href={`/profile/${author?.id}`} className='relative h-11 w-11'>
               <Image
-                src={author.image}
+                src={author?.image}
                 alt='user_community_image'
                 fill
                 className='cursor-pointer rounded-full'
               />
             </Link>
             <div className='flex w-full flex-col'>
-              <Link href={`/profile/${author.id}`} className='w-fit'>
+              <Link href={`/profile/${author?.id}`} className='w-fit'>
                 <h4 className='cursor-pointer text-base-semibold text-light-1'>
-                  {author.name}
+                  {author?.name}
                 </h4>
               </Link>
               <p className="text-subtle-medium text-gray-1"> 
@@ -77,16 +78,25 @@ function ThreadCard({
           </div>
 
           <p className='mt-2 text-small-regular text-light-2'>{content}</p>
-          {images && (
-            <img
-              src={images}
-              alt={""}
-              className="rounded-lg mt-2"
-        
-            />
+          {images && images.length > 0 && (
+            <div className="mt-2">
+              {images.map((media, index) => (
+              // Check if the media URL is not an empty string
+                media && (
+                  media.includes("mp4") ? (
+                  // Display video
+                    <video key={index} controls className="rounded-lg mb-2" >
+                      <source src={media} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    // Display image
+                    <img key={index} src={media} alt="" className="rounded-lg mb-2" />
+                  )
+                )
+              ))}
+            </div>
           )}
- 
- 
           <div className={`${isComment && "mb-2"} mt-0 flex items-center gap-0`}>
             <div className='flex gap-4 mt-3 items-center'>
               
@@ -129,14 +139,13 @@ function ThreadCard({
                   </Link>
                 </div>
               )}
-              
           </div> 
         </div>
 
         <DeleteThread
           threadId={JSON.stringify(id)}
           currentUserId={currentUserId}
-          authorId={author.id}
+          authorId={author?.id}
           parentId={parentId}
           isComment={isComment}
         />

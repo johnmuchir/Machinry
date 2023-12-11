@@ -2,10 +2,9 @@ import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 import ThreadCard from "@/components/cards/ThreadCard";
-import Pagination from "@/components/shared/Pagination";
 import { fetchUser } from "@/lib/actions/user.action";
 import { fetchPosts } from "@/lib/actions/thread.action";
-
+import ThreadSearchbar from "@/components/forms/ThreadSearchbar";
 
 async function Home({
   searchParams,
@@ -18,13 +17,17 @@ async function Home({
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
-  const result = await fetchPosts(
-    searchParams.page ? +searchParams.page : 1, 55 );
+  const result = await fetchPosts({
+    searchString: searchParams.q || '',
+    pageNumber: searchParams?.page ? +searchParams.page : 1,
+    pageSize: 25,
+  });
 
   return (
     <>
+      
       <h1 className='head-text text-left'></h1>
-
+      <ThreadSearchbar routeType="" />
       <section className='mt-2 flex flex-col gap-4'>
         {result.posts.length === 0 ? (
           <p className='no-result'>No posts found</p>
@@ -50,11 +53,6 @@ async function Home({
         )}
       </section>
 
-      <Pagination
-        path='/'
-        pageNumber={searchParams?.page ? +searchParams.page : 1}
-        isNext={result.isNext}
-      />
     </>
   );
 }

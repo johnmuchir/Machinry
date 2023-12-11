@@ -52,8 +52,8 @@ function Likes() {
       </button>
       
       <div className="flex gap-1 text-subtle-medium text-gray-1">
-        Views
-        <p className="text-sm">{randomViews}</p>
+      
+        <p> Views {randomViews}</p>
       </div>
       
     </div>
