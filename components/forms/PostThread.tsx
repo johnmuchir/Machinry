@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-
+import { isBase64Image } from "@/lib/utils";
 import { ThreadValidation } from "@/lib/validations/thread";
 import {
   Form,
@@ -20,7 +20,6 @@ import {
 import { createThread } from "@/lib/actions/thread.action";
 import "@uploadthing/react/styles.css";
 import { useUploadThing } from "@/lib/uploadthing";
-import { isBase64Image } from "@/lib/utils";
 import { ChangeEvent, useState } from "react";
 import { Input } from "../ui/input";
 
@@ -34,7 +33,7 @@ function PostThread({ userId }: Props) {
   const { startUpload } = useUploadThing("mediaPost");
   const { organization } = useOrganization();
   const [files, setFiles] = useState<File[]>([]);
-  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const [filePreviews, setFilePreviews] = useState<string[]>([]);
   const form = useForm<z.infer<typeof ThreadValidation>>({
     resolver: zodResolver(ThreadValidation),
     defaultValues: {
@@ -88,8 +87,8 @@ function PostThread({ userId }: Props) {
         if (!file.type.includes("image") && !file.type.includes("video")) return;
 
         fileReader.onload = async (event) => {
-          const imageDataUrl = event.target?.result?.toString() || "";
-          setImagePreviews((prevPreviews) => [...prevPreviews, imageDataUrl]);
+          const fileDataUrl = event.target?.result?.toString() || "";
+          setFilePreviews((prevPreviews) => [...prevPreviews, fileDataUrl]);
         };
 
         fileReader.readAsDataURL(file);
@@ -118,7 +117,7 @@ function PostThread({ userId }: Props) {
               <FormControl className=" no-focus border border-dark-5 bg-dark-4 text-light-1">
                 <Input
                   type="file"
-                  accept="image/*, video/*"
+                  accept="image/*, video/*, application/pdf"
                   multiple  // Allow multiple file selection
                   placeholder="Add profile photo"
                   className="account-form_image-input"
@@ -129,13 +128,11 @@ function PostThread({ userId }: Props) {
             </FormItem>
           )}
         />
+
         <div className="flex">
-          {imagePreviews.slice(0, 3).map((preview, index) => (
-           <div
-              key={index}
-              className=""
-          
-            >
+          {filePreviews.slice(0, 3).map((preview, index) => (
+           <div key={index} className="">
+            
               <video>
                 <source src={preview} type="video/mp4" />
               </video>

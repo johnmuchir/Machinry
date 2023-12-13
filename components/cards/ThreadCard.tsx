@@ -3,6 +3,7 @@ import Link from "next/link";
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThreads";
 import Likes from "../forms/Likes";
+import MediaViewer from "../shared/MediaViewer";
 
 
 interface Props {
@@ -78,25 +79,8 @@ function ThreadCard({
           </div>
 
           <p className='mt-2 text-small-regular text-light-2'>{content}</p>
-          {images && images.length > 0 && (
-            <div className="mt-2">
-              {images.map((media, index) => (
-              // Check if the media URL is not an empty string
-                media && (
-                  media.includes("mp4") ? (
-                  // Display video
-                    <video key={index} controls className="rounded-lg mb-2" >
-                      <source src={media} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  ) : (
-                    // Display image
-                    <img key={index} src={media} alt="" className="rounded-lg mb-2" />
-                  )
-                )
-              ))}
-            </div>
-          )}
+          <MediaViewer images={images || []} /> 
+          
           <div className={`${isComment && "mb-2"} mt-0 flex items-center gap-0`}>
             <div className='flex gap-4 mt-3 items-center'>
               
