@@ -20,7 +20,7 @@ async function Home({
   const result = await fetchPosts({
     searchString: searchParams.q || '',
     pageNumber: searchParams?.page ? +searchParams.page : 1,
-    pageSize: 25,
+    pageSize: 0,
   });
 
   return (

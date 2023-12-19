@@ -103,7 +103,7 @@ function PostThread({ userId }: Props) {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <div className="text-red-500 text-[12px]">
-          <p>Max 3 Images/Photos</p>
+          <p>Max 5 Images/Photos</p>
           <p>Max 1 Min Video</p>
         </div>
         <FormField
@@ -130,7 +130,7 @@ function PostThread({ userId }: Props) {
         />
 
         <div className="flex">
-          {filePreviews.slice(0, 3).map((preview, index) => (
+          {filePreviews.slice(0, 5).map((preview, index) => (
            <div key={index} className="">
             
               <video>

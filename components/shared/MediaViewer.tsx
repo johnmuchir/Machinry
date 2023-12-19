@@ -1,68 +1,100 @@
 "use client"
 
-import React, { useState } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
+import MediaModal from '../forms/MediaModal';
 
 interface MediaViewerProps {
   images: string[];
 }
 
 const MediaViewer: React.FC<MediaViewerProps> = ({ images }) => {
-  const [selectedMedia, setSelectedMedia] = useState<string | null>(null);
+  const [selectedMediaIndex, setSelectedMediaIndex] = useState<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const openMediaOverlay = (media: string) => {
-    setSelectedMedia(media);
+  const openMediaOverlay = (index: number) => {
+    setSelectedMediaIndex(index);
   };
 
   const closeMediaOverlay = () => {
-    setSelectedMedia(null);
+    setSelectedMediaIndex(null);
   };
 
+  useEffect(() => {
+    // Pause the video when the overlay is closed
+    if (!selectedMediaIndex && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [selectedMediaIndex]);
+
+  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+    if (entries && entries.length > 0) {
+      const isInView = entries[0].isIntersecting;
+
+      // Play or pause the video based on visibility
+      if (videoRef.current) {
+        isInView ? videoRef.current.play() : videoRef.current.pause();
+      }
+    }
+  };
+
+  useEffect(() => {
+    const videoObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+
+    // Observe the video element
+    if (videoRef.current) {
+      videoObserver.observe(videoRef.current);
+    }
+
+    // Cleanup observer on component unmount
+    return () => {
+      if (videoRef.current) {
+        videoObserver.unobserve(videoRef.current);
+      }
+    };
+  }, []);
+
+  const visibleImages = images.slice(0, 2); // Display only the first two images
+  const remainingImagesCount = images.length - 2;
+
   return (
-    <div>
-      {images && images.length > 0 && (
-        <div className="mt-2">
-          {images.map((media, index) => (
-            // Check if the media URL is not an empty string
-            media && (
-              <div key={index} className="media-container">
-                {media.includes('pdf') ? (
-                  // Display video
-                  <div onClick={() => openMediaOverlay(media)}>
-                    <iframe src={media} title={`pdf-${index}`} width="100%" height="200" />
-                  </div>
-                ) : media.includes('mp4') ? (
-                  // Display PDF - you can customize this part based on your preference
-                  <video controls className="rounded-lg mb-2">
+    <div className='relative'>
+      {visibleImages && visibleImages.length > 0 && (
+        <div className="mt-2 flex items-center">
+          {visibleImages.map((media, index) => (
+            <div key={index} className="media-container w-full">
+              {media.includes('mp4') ? (
+                <div>
+                  {/* Add a ref to the video element */}
+                  <video ref={videoRef} controls className="rounded-lg mb-2">
                     <source src={media} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
-                ) : (
-                  // Display image
-                  <div onClick={() => openMediaOverlay(media)}>
-                    <img src={media} alt="" className="rounded-lg mb-2" />
-                  </div>
-                )}
-              </div>
-            )
+                </div>
+              ) : media.includes('pdf') ? (
+                <div onClick={() => openMediaOverlay(index)}>
+                  {/* Adjust the styling of the iframe */}
+                  <iframe src={media} title={`pdf-${index}`} className='w-full' />
+                </div>
+              ) : (
+                <div onClick={() => openMediaOverlay(index)}>
+                  <img src={media} alt="" className="rounded-lg mb-2" />
+                </div>
+              )}
+            </div>
           ))}
         </div>
       )}
 
-      {selectedMedia && (
-        <div className='fixed top-0 left-0 w-full h-full bg-black flex justify-center items-center z-50' onClick={closeMediaOverlay}>
-          <div className='h-auto w-full overflow-hidden bg-white p-0 relative'>
-            {/* Render the selected media in fullscreen here */}
-            {selectedMedia.includes('pdf') ? (
-              <iframe src={selectedMedia} title="fullscreen-pdf" width="100%" height="100%" />
-            ) : selectedMedia.includes('pdf') ? (
-              <iframe src={selectedMedia} title="fullscreen-pdf" width="100%" height="100%" />
-            ) : (
-              <img src={selectedMedia} alt="" className="w-full h-full" />
-            )}
-          </div>
+      {remainingImagesCount > 0 && (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-200 p-2 rounded ">
+          {`+${remainingImagesCount} `}
         </div>
       )}
+
+      {selectedMediaIndex !== null && (
+        <MediaModal images={images} onClose={closeMediaOverlay} />
+      )}
+
     </div>
   );
 };
