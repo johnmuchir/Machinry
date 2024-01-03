@@ -108,7 +108,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   return (
     <Form {...form}>
       <form
-        className='flex flex-col justify-start gap-10'
+        className='flex flex-col justify-start gap-5'
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -199,7 +199,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
               </FormLabel>
               <FormControl>
                 <Textarea
-                  rows={10}
+                  rows={3}
                   className='account-form_input no-focus'
                   {...field}
                 />

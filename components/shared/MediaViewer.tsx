@@ -53,8 +53,8 @@ const MediaViewer: React.FC<MediaViewerProps> = ({ images }) => {
     };
   }, []);
 
-  const visibleImages = images.slice(0, 2); // Display only the first two images
-  const remainingImagesCount = images.length - 2;
+  const visibleImages = images.slice(0, 3); // Display only the first two images
+  const remainingImagesCount = images.length - 0;
 
   return (
     <div className='relative'>
@@ -77,7 +77,7 @@ const MediaViewer: React.FC<MediaViewerProps> = ({ images }) => {
                 </div>
               ) : (
                 <div onClick={() => openMediaOverlay(index)}>
-                  <img src={media} alt="" className="rounded-lg mb-2" />
+                  <img src={media} alt="" className="rounded-lg mb-2 cursor-pointer " />
                 </div>
               )}
             </div>
@@ -85,11 +85,11 @@ const MediaViewer: React.FC<MediaViewerProps> = ({ images }) => {
         </div>
       )}
 
-      {remainingImagesCount > 0 && (
+      {/*{remainingImagesCount > 0 && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-200 p-2 rounded ">
           {`+${remainingImagesCount} `}
         </div>
-      )}
+      )}*/}
 
       {selectedMediaIndex !== null && (
         <MediaModal images={images} onClose={closeMediaOverlay} />

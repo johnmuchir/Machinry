@@ -99,12 +99,11 @@ function PostThread({ userId }: Props) {
   return (
     <Form {...form}>
       <form
-        className=" flex flex-col gap-1"
+        className=" flex flex-col gap-5"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <div className="text-red-500 text-[12px]">
-          <p>Max 5 Images/Photos</p>
-          <p>Max 1 Min Video</p>
+          <p>Max 3 Images/Photos</p>
         </div>
         <FormField
           control={form.control}
@@ -129,13 +128,11 @@ function PostThread({ userId }: Props) {
           )}
         />
 
-        <div className="flex">
-          {filePreviews.slice(0, 5).map((preview, index) => (
+        <div className="flex items-center">
+          {filePreviews.slice(0, 3).map((preview, index) => (
            <div key={index} className="">
             
-              <video>
-                <source src={preview} type="video/mp4" />
-              </video>
+             
           
               <img src={preview} alt='' className="preview-image" />
             </div> 
@@ -155,9 +152,15 @@ function PostThread({ userId }: Props) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-primary-500">
-          Submit
-        </Button>
+        <button
+          type="submit"
+          disabled={form.formState.isSubmitting}
+          className={`button p-2 rounded-full col-span-2 w-full
+          ${form.formState.isSubmitting ? 'bg-gray-700 ' : 'bg-primary-500'}`}
+        >
+          {form.formState.isSubmitting ? 'Submitting...' : 'Submit'}
+        </button>
+
       </form>
     </Form>
   );

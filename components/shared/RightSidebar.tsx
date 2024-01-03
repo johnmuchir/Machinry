@@ -4,6 +4,7 @@ import UserCard from "../cards/UserCard";
 
 import { fetchCommunities } from "@/lib/actions/community.actions";
 import { fetchUsers } from "@/lib/actions/user.action";
+import MyImage from "./MyImage";
 
 async function RightSidebar() {
   const user = await currentUser();
@@ -11,14 +12,14 @@ async function RightSidebar() {
 
   const similarMinds = await fetchUsers({
     userId: user.id,
-    pageSize: 4,
+    pageSize: 5,
   });
 
   const suggestedCOmmunities = await fetchCommunities({ pageSize: 4 });
 
   return (
     <section className='custom-scrollbar rightsidebar'>
-      <div className='flex flex-1 flex-col justify-start'>
+      {/*<div className='flex flex-1 flex-col justify-start'>
         <h3 className='text-heading4-medium text-light-1'>
           Suggested Communities
         </h3>
@@ -43,11 +44,16 @@ async function RightSidebar() {
             </p>
           )}
         </div>
-      </div>
-
+        </div>*/}
+        <div className="w-[350px] gap-">
+          <h3 className='text-heading4-medium text-light-1'>Available</h3>
+          <div className="mt-5">
+            <MyImage />
+          </div>
+        </div>
       <div className='flex flex-1 flex-col justify-start'>
         <h3 className='text-heading4-medium text-light-1'>Similar Minds</h3>
-        <div className='mt-7 flex w-[350px] flex-col gap-10'>
+        <div className='mt-7 flex w-[350px] flex-col gap-5'>
           {similarMinds.users.length > 0 ? (
             <>
               {similarMinds.users.map((person) => (

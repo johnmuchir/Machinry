@@ -26,11 +26,21 @@ const MediaModal: React.FC<MediaModalProps> = ({ images, onClose }) => {
         />
         {images.length > 1 && (
           <>
-            <button className="absolute top-0 left-0 p-4 text-white" onClick={handlePrevImage}>
-              Prev
+            <button className="absolute bottom-0 left-0 p-2 rounded-lg text-white bg-black opacity-40" onClick={handlePrevImage}>
+              <img 
+                src="/assets/left.png" 
+                alt="next"
+                width={24}
+                height={24}
+              />
             </button>
-            <button className="absolute top-0 right-0 p-4 text-white" onClick={handleNextImage}>
-              Next
+            <button className="absolute bottom-0 right-0 p-2 rounded-lg text-white  bg-black opacity-40 " onClick={handleNextImage}>
+              <img 
+                src="/assets/right.png" 
+                alt="next"
+                width={24}
+                height={24}
+              />
             </button>
           </>
         )}
