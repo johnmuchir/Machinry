@@ -11,7 +11,7 @@ const Facebook = ({ url, quote, }: FacebookProps) => {
   return (
     <div>
       <a href={shareUrl} target="_blank" rel="noopener noreferrer">
-        <Image src='/assets/share.png' alt='whatsapp' width={24} height={24} className='h-6 w-6' />
+        <Image src='/assets/share.png' alt='whatsapp' width={24} height={24} className='h-6 w-6 bg-gray-400 rounded-full mt-2  ' />
       </a>
     </div>
   );

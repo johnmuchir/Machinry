@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThreads";
-import Likes from "../forms/Likes";
 import MediaViewer from "../shared/MediaViewer";
 import Facebook from "../shared/Facebook";
 
@@ -59,18 +58,18 @@ function ThreadCard({
       <div className='flex items-start justify-between'>
         <div className='flex w-full flex-1 flex-col gap-0'>
           <div className='flex items-center gap-2'>
-            <Link href={`/profile/${author?.id}`} className='relative h-11 w-11'>
-              <Image
+            <Link href={`/profile/${author?.id}`} className=''>
+              <img
                 src={author?.image}
-                alt='user_community_image'
-                width={60}
-                height={60}
-                className='cursor-pointer w-full h-full rounded-full'
+                alt='image'
+                width={30}
+                height={30}
+                className='cursor-pointer w-12 h-11 rounded-full'
               />
             </Link>
             <div className='flex w-full flex-col'>
               <Link href={`/profile/${author?.id}`} className='w-fit'>
-                <h4 className='cursor-pointer text-base-semibold text-light-1'>
+                <h4 className='cursor-pointer text-small-semibold text-light-1'>
                   {author?.name}
                 </h4>
               </Link>
@@ -81,10 +80,11 @@ function ThreadCard({
           </div>
 
           <p className='mt-2 text-small-regular text-light-2'>{content}</p>
-          <MediaViewer images={images || []} /> 
-          
-          <div className={`${isComment && "mb-2"} mt-0 flex justify-between items-center gap-0`}>
-            <Likes />
+          <div className=" overflow-hidden ">
+            <MediaViewer images={images || []} /> 
+          </div>
+          <hr className=" border-none " />
+          <div className={`${isComment && "mb-2"} mt-0 flex justify-around items-center gap-0`}>
             <div className='flex mt-2 items-center'>
               
               <Link href={`/thread/${id}`}>
@@ -93,12 +93,12 @@ function ThreadCard({
                   alt='heart'
                   width={24}
                   height={24}
-                  className='cursor-pointer object-contain'
+                  className='cursor-pointer '
                 />
               </Link>
               {isComment && comments.length > 0 && (
                 <Link href={`/thread/${id}`}>
-                  <p className='mt-1 text-subtle-medium text-gray-1'>
+                  <p className='mt-10 text-subtle-medium text-gray-1'>
                     {comments.length} repl{comments.length > 1 ? "ies" : "y"}
                   </p>
                 </Link>
@@ -108,18 +108,18 @@ function ThreadCard({
               {!isComment && comments.length > 0 && (
                 <div className=' flex items-center gap-2'>
                   {comments.slice(0, 2).map((comment, index) => (
-                    <Image
+                    <img
                       key={index}
                       src={comment.author.image}
                       alt={`user_${index}`}
                       width={24}
                       height={24}
-                      className={`${index !== 0 && "-ml-5"} rounded-full object-cover`}
+                      className={`${index !== 0 && "-ml-5"} rounded-full w-5 h-5 `}
                     />
                   ))}
 
                   <Link href={`/thread/${id}`}>
-                    <p className='mt-1 text-subtle-medium text-gray-1'>
+                    <p className='mt-0 text-subtle-medium text-gray-1'>
                       {comments.length} repl{comments.length > 1 ? "ies" : "y"}
                     </p>
                   </Link>
@@ -129,10 +129,7 @@ function ThreadCard({
               </div>
               <Facebook url={`https://machinry.vercel.app/thread/${id}`} quote={''} />
             </div> 
-          
-            
           </div>
-
         <DeleteThread
           threadId={JSON.stringify(id)}
           currentUserId={currentUserId}

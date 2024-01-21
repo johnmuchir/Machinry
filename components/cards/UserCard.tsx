@@ -16,17 +16,17 @@ const UserCard = ({ id, name, username, imgUrl, personType}: Props) => {
     const router = useRouter();
     return (
         <article className="user-card">
-            <div className="user-card_avatar">
-                <Image
+            <div className="user-card_avatar ">
+                <img
                     src={imgUrl}
                     alt="logo"
-                    width={48}
-                    height={48}
-                    className="rounded-full"
+                    width={30}
+                    height={30}
+                    className="rounded-full w-10 h-10 "
                 />
                 <div className="flex-1 text-ellipsis">
-                    <h4 className="text-base-semibold text-light-1">{name}</h4>
-                    <p className="text-small-medium text-gray-1">@{username}1</p>
+                    <h4 className=" text-small-semibold text-light-1">{name}</h4>
+                    <p className="text-small-regular text-gray-1">@{username}1</p>
                 </div>
             </div>
             <Button className="user-card_btn" onClick={() => router.push(`/profile/${id}`)}>

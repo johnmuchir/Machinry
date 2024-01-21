@@ -24,18 +24,18 @@ async function Topbar() {
                    width={40}
                    height={40}
                    priority
-                   className="rounded-lg" 
+                   className="rounded-lg w-10 h-10" 
                 />
                <p className='cursor-pointer p-1 overflow-hidden text-[12px] rounded-lg bg-gradient-to-r from-pink-500 to-yellow-500 ... max-xs:hidden'>Machinary</p>
             </Link>
 
             <Link href='/profile/edit'>
-            <Image
+            <img
                 src={userInfo?.image}
-                alt='user_community_image'
-                width={40}
-                height={40}
-                className='cursor-pointer w-full h-full rounded-full'
+                alt='image'
+                width={30}
+                height={30}
+                className='cursor-pointer w-10 h-10 rounded-full'
               />
             </Link>
 

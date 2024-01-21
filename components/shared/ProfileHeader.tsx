@@ -16,20 +16,20 @@ const ProfileHeader = ({ accountId, authUserId, name, username, imgUrl, bio, typ
         <div className="flex w-full flex-col justify-start">
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <div className='relative h-15 w-20 object-cover'>
-                        <Image 
+                    <div className='relative h-15 object-cover'>
+                        <img 
                             src={imgUrl}
-                            alt="logo"
-                            width={60}
-                            height={60}
-                            className="rounded-full object-cover w-full h-full"
+                            alt="image"
+                            width={40}
+                            height={40}
+                            className="rounded-full w-12 h-12"
                         />
                     </div>
                     <div className='flex-1'>
-                        <h2 className='text-left text-heading3-bold text-light-1'>
+                        <h2 className='text-left text-small-semibold text-light-1'>
                             {name}
                         </h2>
-                        <p className='text-base-medium text-gray-1'>@{username}</p>
+                        <p className='text-small-regular text-gray-1'>@{username}</p>
                     </div>
                 </div>
                 {accountId === authUserId && type !== "Community" && (

@@ -51,19 +51,19 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
 
   return (
     <Form {...form}>
-      <form className='comment-form' onSubmit={form.handleSubmit(onSubmit)}>
+      <form className='flex items-center gap-2' onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name='thread'
           render={({ field }) => (
-            <FormItem className='flex w-full items-center gap-3'>
+            <FormItem className='flex w-full items-center gap-2'>
               <FormLabel>
-                <Image
+                <img
                   src={currentUserImg}
                   alt='current_user'
-                  width={48}
-                  height={48}
-                  className='rounded-full object-cover'
+                  width={40}
+                  height={40}
+                  className='rounded-full h-10 w-11 '
                 />
               </FormLabel>
               <FormControl className='border-none bg-transparent'>
@@ -71,16 +71,16 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
                   type='text'
                   {...field}
                   placeholder='Comment...'
-                  className='no-focus text-light-1 outline-none'
+                  className=' text-light-1 outline-none rounded-full bg-dark-4'
                 />
               </FormControl>
             </FormItem>
           )}
         />
   
-        <Button type='submit' className='comment-form_btn'>
+        <button type='submit' className='comment-form_bt rounded-full bg-blue text-[12px] p-2'>
           Submit
-        </Button>
+        </button>
       </form>
     </Form>
   );
