@@ -21,30 +21,30 @@ const Page = async ({ params }: { params: { id: string }}) => {
         <section className="relative">
             <div>
                 <ThreadCard
-                    key={thread._id}
-                    id={thread._id}
+                    key={thread?._id}
+                    id={thread?._id}
                     currentUserId={user?.id || ""}
-                    parentId={thread.parentId}
-                    content={thread.text}
-                    images={thread.images}  
-                    author={thread.author}
-                    community={thread.community}
-                    createdAt={thread.createdAt}
-                    comments={thread.children} 
-                    likes={thread.children} 
+                    parentId={thread?.parentId}
+                    content={thread?.text}
+                    images={thread?.images}  
+                    author={thread?.author}
+                    community={thread?.community}
+                    createdAt={thread?.createdAt}
+                    comments={thread?.children} 
+                    likes={thread?.children} 
                                 
                 />
             </div>
             <div className="mt-3">
                 <Comment
-                    threadId={thread.id}
+                    threadId={thread?.id}
                     currentUserImg={userInfo.image}
                     currentUserId={JSON.stringify(userInfo._id)}
                 />
             </div>
         
             <div className="mt-7">
-                {thread.children.map((childItem: any) => (
+                {thread?.children.map((childItem: any) => (
                     <ThreadCard 
                         key={childItem._id}
                         id={childItem._id}

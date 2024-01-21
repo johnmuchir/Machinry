@@ -84,6 +84,7 @@ function ThreadCard({
             <MediaViewer images={images || []} /> 
           </div>
           <hr className=" border-none " />
+
           <div className={`${isComment && "mb-2"} mt-0 flex justify-around items-center gap-0`}>
             <div className='flex mt-2 items-center'>
               
@@ -98,14 +99,13 @@ function ThreadCard({
               </Link>
               {isComment && comments.length > 0 && (
                 <Link href={`/thread/${id}`}>
-                  <p className='mt-10 text-subtle-medium text-gray-1'>
+                  <p className='mt-0 text-subtle-medium text-gray-1'>
                     {comments.length} repl{comments.length > 1 ? "ies" : "y"}
                   </p>
                 </Link>
               )}
             
-            
-              {!isComment && comments.length > 0 && (
+              {!isComment && comments?.length > 0 && (
                 <div className=' flex items-center gap-2'>
                   {comments.slice(0, 2).map((comment, index) => (
                     <img
@@ -124,12 +124,12 @@ function ThreadCard({
                     </p>
                   </Link>
                 </div>
-                
               )}
-              </div>
-              <Facebook url={`https://machinry.vercel.app/thread/${id}`} quote={''} />
-            </div> 
-          </div>
+            </div>
+            <Facebook url={`https://machinry.vercel.app/thread/${id}`} quote={''} />
+          </div> 
+        </div>
+    
         <DeleteThread
           threadId={JSON.stringify(id)}
           currentUserId={currentUserId}
