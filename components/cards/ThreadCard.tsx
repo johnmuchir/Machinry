@@ -4,6 +4,7 @@ import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThreads";
 import Likes from "../forms/Likes";
 import MediaViewer from "../shared/MediaViewer";
+import Facebook from "../shared/Facebook";
 
 
 interface Props {
@@ -82,10 +83,9 @@ function ThreadCard({
           <p className='mt-2 text-small-regular text-light-2'>{content}</p>
           <MediaViewer images={images || []} /> 
           
-          <div className={`${isComment && "mb-2"} mt-0 flex items-center gap-0`}>
-            <div className='flex gap-4 mt-3 items-center'>
-              
-              <Likes />
+          <div className={`${isComment && "mb-2"} mt-0 flex justify-between items-center gap-0`}>
+            <Likes />
+            <div className='flex mt-2 items-center'>
               
               <Link href={`/thread/${id}`}>
                 <Image
@@ -103,9 +103,10 @@ function ThreadCard({
                   </p>
                 </Link>
               )}
-            </div>
+            
+            
               {!isComment && comments.length > 0 && (
-                <div className='ml-1 mt-3 flex items-center gap-2'>
+                <div className=' flex items-center gap-2'>
                   {comments.slice(0, 2).map((comment, index) => (
                     <Image
                       key={index}
@@ -123,8 +124,13 @@ function ThreadCard({
                     </p>
                   </Link>
                 </div>
+                
               )}
+              </div>
+              <Facebook url={`https://machinry.vercel.app/thread/${id}`} quote={''} />
             </div> 
+          
+            
           </div>
 
         <DeleteThread
