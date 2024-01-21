@@ -62,8 +62,9 @@ function ThreadCard({
               <Image
                 src={author?.image}
                 alt='user_community_image'
-                fill
-                className='cursor-pointer rounded-full'
+                width={60}
+                height={60}
+                className='cursor-pointer w-full h-full rounded-full'
               />
             </Link>
             <div className='flex w-full flex-col'>
@@ -123,8 +124,8 @@ function ThreadCard({
                   </Link>
                 </div>
               )}
-          </div> 
-        </div>
+            </div> 
+          </div>
 
         <DeleteThread
           threadId={JSON.stringify(id)}

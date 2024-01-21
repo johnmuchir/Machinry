@@ -53,19 +53,19 @@ const MediaViewer: React.FC<MediaViewerProps> = ({ images }) => {
     };
   }, []);
 
-  const visibleImages = images.slice(0, 3); // Display only the first two images
+  const visibleImages = images.slice(0, 4); // Display only the first two images
   const remainingImagesCount = images.length - 0;
 
   return (
     <div className='relative'>
       {visibleImages && visibleImages.length > 0 && (
-        <div className="mt-2 flex items-center">
+        <div className={`mt-2 ${visibleImages.length === 1 ? 'flex items-center' : 'grid grid-cols-2 gap-1'}`}>
           {visibleImages.map((media, index) => (
-            <div key={index} className="media-container w-full">
+            <div key={index} className=" w-full">
               {media.includes('mp4') ? (
                 <div>
                   {/* Add a ref to the video element */}
-                  <video ref={videoRef} controls className="rounded-lg mb-2">
+                  <video ref={videoRef} className="rounded-lg">
                     <source src={media} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
@@ -77,7 +77,7 @@ const MediaViewer: React.FC<MediaViewerProps> = ({ images }) => {
                 </div>
               ) : (
                 <div onClick={() => openMediaOverlay(index)}>
-                  <img src={media} alt="" className="rounded-lg mb-2 cursor-pointer " />
+                  <img src={media} alt="" className="rounded-lg cursor-pointer " />
                 </div>
               )}
             </div>

@@ -103,7 +103,7 @@ function PostThread({ userId }: Props) {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <div className="text-red-500 text-[12px]">
-          <p>Max 3 Images/Photos</p>
+          <p>Max 4 Images/Photos</p>
         </div>
         <FormField
           control={form.control}
@@ -128,12 +128,10 @@ function PostThread({ userId }: Props) {
           )}
         />
 
-        <div className="flex items-center">
-          {filePreviews.slice(0, 3).map((preview, index) => (
-           <div key={index} className="">
-            
-             
-          
+        <div className="grid grid-cols-2 gap-1 items-center">
+          {filePreviews.slice(0, 4).map((preview, index) => (
+            <div key={index} className="">
+              
               <img src={preview} alt='' className="preview-image" />
             </div> 
           ))}

@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: "Machinary",
-  description: "A Next.js 13 Meta Machinary Application"
+  description: " Heavy Equipment Community Hub - Connect"
 }
 
 export default function RootLayout({

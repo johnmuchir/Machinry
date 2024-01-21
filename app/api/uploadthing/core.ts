@@ -31,7 +31,7 @@ export const ourFileRouter = {
     }),
      // ADDED Takes a 4 2mb images and/or 1 256mb video
      mediaPost: f({
-      image: { maxFileSize: "2MB", maxFileCount: 3 },
+      image: { maxFileSize: "2MB", maxFileCount: 4 },
       
     })
       .middleware(async (req) => {

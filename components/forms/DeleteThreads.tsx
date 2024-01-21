@@ -4,8 +4,6 @@ import { deleteThread } from "@/lib/actions/thread.action";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
-
-
 interface Props {
   threadId: string;
   currentUserId: string;
@@ -29,7 +27,7 @@ function DeleteThread({
   return (
     <Image
       src='/assets/delete.svg'
-      alt='delte'
+      alt='delete'
       width={18}
       height={18}
       className='cursor-pointer object-contain'

@@ -35,7 +35,7 @@ async function Topbar() {
                 alt='user_community_image'
                 width={40}
                 height={40}
-                className='cursor-pointer rounded-full'
+                className='cursor-pointer w-full h-full rounded-full'
               />
             </Link>
 
@@ -52,7 +52,7 @@ async function Topbar() {
                 <div className='block md:hidden'>
                     <SignedIn>
                     <SignOutButton>
-                    <div className='flex cursor-pointer'>
+                    <div className='flex text-light-3 cursor-pointer'>
                         <Image
                            src='/assets/logout.svg'
                            alt='logout'

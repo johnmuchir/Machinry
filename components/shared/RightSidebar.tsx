@@ -12,7 +12,7 @@ async function RightSidebar() {
 
   const similarMinds = await fetchUsers({
     userId: user.id,
-    pageSize: 5,
+    pageSize: 3,
   });
 
   const suggestedCOmmunities = await fetchCommunities({ pageSize: 4 });
@@ -45,12 +45,12 @@ async function RightSidebar() {
           )}
         </div>
         </div>*/}
-        <div className="w-[350px] gap-">
-          <h3 className='text-heading4-medium text-light-1'>Available</h3>
-          <div className="mt-5">
-            <MyImage />
-          </div>
+      <div className="w-[350px] ">
+        <h3 className='text-heading4-medium text-light-1'>Available Space</h3>
+        <div className="mt-5">
+          <MyImage />
         </div>
+      </div>
       <div className='flex flex-1 flex-col justify-start'>
         <h3 className='text-heading4-medium text-light-1'>Similar Minds</h3>
         <div className='mt-7 flex w-[350px] flex-col gap-5'>

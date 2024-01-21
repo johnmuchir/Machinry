@@ -22,7 +22,7 @@ const ProfileHeader = ({ accountId, authUserId, name, username, imgUrl, bio, typ
                             alt="logo"
                             width={60}
                             height={60}
-                            className="rounded-full object-cover shadow-2xl"
+                            className="rounded-full object-cover w-full h-full"
                         />
                     </div>
                     <div className='flex-1'>

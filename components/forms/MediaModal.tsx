@@ -26,7 +26,7 @@ const MediaModal: React.FC<MediaModalProps> = ({ images, onClose }) => {
         />
         {images.length > 1 && (
           <>
-            <button className="absolute bottom-0 left-0 p-2 rounded-lg text-white bg-black opacity-40" onClick={handlePrevImage}>
+            <button className="absolute bottom-0 left-0 p-2 rounded-lg text-white " onClick={handlePrevImage}>
               <img 
                 src="/assets/left.png" 
                 alt="next"
@@ -34,7 +34,7 @@ const MediaModal: React.FC<MediaModalProps> = ({ images, onClose }) => {
                 height={24}
               />
             </button>
-            <button className="absolute bottom-0 right-0 p-2 rounded-lg text-white  bg-black opacity-40 " onClick={handleNextImage}>
+            <button className="absolute bottom-0 right-0 p-2 rounded-lg text-white " onClick={handleNextImage}>
               <img 
                 src="/assets/right.png" 
                 alt="next"
