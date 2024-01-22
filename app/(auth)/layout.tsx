@@ -5,7 +5,7 @@ import "../globals.css";
 
 
 export const metadata = {
-    title: "Machinary",
+    title: "Machinry",
     description: "Heavy Equipment Community Hub - Connect"
 }
 

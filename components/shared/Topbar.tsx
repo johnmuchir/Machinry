@@ -7,7 +7,7 @@ import { fetchUser } from "@/lib/actions/user.action";
 
 async function Topbar() {
     const user = await currentUser();
-    
+
     if (!user) return null;
 
     const userInfo = await fetchUser(user.id);
@@ -19,17 +19,17 @@ async function Topbar() {
         <nav className="topbar">
             <Link href='/' className='flex items-center gap-1'>
                <Image 
-                   src='/assets/logo-1.png' 
+                   src='/assets/icon.png' 
                    alt='logo' 
                    width={40}
                    height={40}
                    priority
-                   className="rounded-lg w-10 h-10" 
+                   className="rounded-lg w-9 h-9" 
                 />
-               <p className='cursor-pointer p-1 overflow-hidden text-[12px] rounded-lg bg-gradient-to-r from-pink-500 to-yellow-500 ... max-xs:hidden'>Machinary</p>
+               <p className='cursor-pointer p-1 overflow-hidden text-[12px] rounded-lg bg-gradient-to-r from-pink-500 to-yellow-500 ... max-xs:hidden'>Machinry</p>
             </Link>
-
-            <Link href='/profile/edit'>
+            
+            <Link href={`/profile/${user?.id}`}>
             <img
                 src={userInfo?.image}
                 alt='image'

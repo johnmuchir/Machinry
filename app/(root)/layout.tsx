@@ -10,7 +10,7 @@ import { dark } from "@clerk/themes";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Machinary",
+  title: "Machinry",
   description: " Heavy Equipment Community Hub - Connect"
 }
 

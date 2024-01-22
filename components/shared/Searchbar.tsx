@@ -28,22 +28,15 @@ function Searchbar({ routeType }: Props) {
   }, [search, routeType]);
 
   return (
-    <div className='searchbar'>
-      <Image
-        src='/assets/search-gray.svg'
-        alt='search'
-        width={24}
-        height={24}
-        className='object-contain '
-      />
+    <div className='text-light-2'>
       <Input
         id='text'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder={`${
-          routeType !== "/search" ? "Search all" : "Search creators"
+          routeType !== "/search" ? "Search AI ,,, comming soon" : "Search creators"
         }`}
-        className='no-focus searchbar_input'
+        className='no-focus searchbar_input rounded-full text-light-1 '
       />
     </div>
   );

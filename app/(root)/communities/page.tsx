@@ -75,25 +75,25 @@ const page = () => {
               alt="email"
               width={28}
               height={28}
-              className='cursor-pointer'
+              className='cursor-pointer w-7 h-7'
             />
           </Link>
           <a href="https://wa.me/+254739435290">
-            <img src="/assets/whatsapp.png" alt="whatsapp" width={28} height={28}/>
+            <img src="/assets/whatsapp.png" alt="whatsapp" width={28} height={28} className='w-7 h-7'/>
           </a>
         </div>
       </div>
       <div className='flex items-center mt-10 justify-between '>
        <Link href={'/'}>
         <img 
-          src="/assets/logo-1.png" 
+          src="/assets/icon.png" 
           alt="" 
           width={40}
           height={40}
-          className='rounded-full'
+          className='rounded-full w-10 h-10'
         />
         </Link>
-        <p className='text-light-3 text-subtle-medium '>2024 Machinary. All Rights reserved.</p>
+        <p className='text-light-3 text-subtle-medium '>2024 Machinry. All Rights reserved.</p>
       </div>
     </div>
     </>
