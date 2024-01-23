@@ -1,5 +1,4 @@
-import { currentUser, OrganizationSwitcher, SignedIn, SignOutButton } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+import { currentUser, SignedIn, SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -35,7 +34,7 @@ async function Topbar() {
                 alt='image'
                 width={30}
                 height={30}
-                className='cursor-pointer w-10 h-10 rounded-full'
+                className='cursor-pointer w-9 h-9 rounded-full'
               />
             </Link>
 

@@ -28,14 +28,8 @@ function ThreadSearchbar({ routeType }: Props) {
   }, [search, routeType]);
 
   return (
-    <div className='searchbar'>
-      <Image
-        src='/assets/search-gray.svg'
-        alt='search'
-        width={24}
-        height={24}
-        className='object-contain'
-      />
+    <div className='searchbar rounded-full p-0 mb-7'>
+      
       <Input
         id='text'
         value={search}
@@ -43,7 +37,7 @@ function ThreadSearchbar({ routeType }: Props) {
         placeholder={`${
             routeType !== "/search" ? "Search Machinary, Spares, Manuals " : "Search creators"
         }`}
-        className='no-focus bg-dark-4 text-light-1'
+        className='no-focus bg-dark-4 text-light-1 rounded-full border-none'
       />
     </div>
   );

@@ -76,8 +76,8 @@ const MediaViewer: React.FC<MediaViewerProps> = ({ images }) => {
                   <iframe src={media} title={`pdf-${index}`} className='w-full' />
                 </div>
               ) : (
-                <div onClick={() => openMediaOverlay(index)}>
-                  <img src={media} alt="" className="rounded-lg cursor-pointer " />
+                <div onClick={() => openMediaOverlay(index)} className='' >
+                  <img src={media} alt="" className="rounded-lg cursor-pointer h-auto w-full " />
                 </div>
               )}
             </div>

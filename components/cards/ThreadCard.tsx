@@ -64,7 +64,7 @@ function ThreadCard({
                 alt='image'
                 width={30}
                 height={30}
-                className='cursor-pointer w-12 h-11 rounded-full'
+                className='cursor-pointer w-11 h-10 rounded-full'
               />
             </Link>
             <div className='flex w-full flex-col'>
@@ -80,7 +80,7 @@ function ThreadCard({
           </div>
 
           <p className='mt-2 text-small-regular text-light-2'>{content}</p>
-          <div className=" overflow-hidden ">
+          <div className=" ">
             <MediaViewer images={images || []} /> 
           </div>
           <hr className=" border-none " />
