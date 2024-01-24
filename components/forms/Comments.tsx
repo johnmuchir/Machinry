@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 
 import { CommentValidation } from "@/lib/validations/thread";
 import { addCommentToThread } from "@/lib/actions/thread.action";
+import { Textarea } from "../ui/textarea";
 
 
 interface Props {
@@ -66,12 +67,12 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
                   className='rounded-full h-10 w-11 '
                 />
               </FormLabel>
-              <FormControl className='border-none bg-transparent'>
-                <Input
-                  type='text'
+              <FormControl className='border-none bg-dark-4 px-3 '>
+                <textarea
                   {...field}
                   placeholder='Comment...'
-                  className=' text-light-1 outline-none rounded-full bg-dark-4'
+                  className=' w-full text-[14px] text-light-1 outline-none rounded-full'
+                  style={{ overflow: 'hidden', }} 
                 />
               </FormControl>
             </FormItem>
