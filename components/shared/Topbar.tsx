@@ -1,8 +1,10 @@
-import { currentUser, SignedIn, SignOutButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs";
 import Link from "next/link";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { fetchUser } from "@/lib/actions/user.action";
+import MobileNav from "../forms/MobileNav";
+import Bottombar from "./Bottombar";
 
 async function Topbar() {
     const user = await currentUser();
@@ -15,6 +17,7 @@ async function Topbar() {
 
     
     return (
+        <>
         <nav className="topbar">
             <Link href='/' className='flex items-center gap-1'>
                <Image 
@@ -23,48 +26,46 @@ async function Topbar() {
                    width={40}
                    height={40}
                    priority
-                   className="rounded-lg w-9 h-9" 
+                   className="rounded-full w-10 h-10" 
                 />
-               <p className='cursor-pointer p-1 overflow-hidden text-[12px] rounded-lg bg-gradient-to-r from-pink-500 to-yellow-500 ... max-xs:hidden'>Machinry</p>
             </Link>
-            
-            <Link href={`/profile/${user?.id}`}>
-            <img
-                src={userInfo?.image}
-                alt='image'
-                width={30}
-                height={30}
-                className='cursor-pointer w-9 h-9 rounded-full'
-              />
-            </Link>
-
-            {/*<OrganizationSwitcher
-                appearance={{
-                    baseTheme: dark,
-                    elements: {
-                        organizationSwitcherTrigger: "pt-2 px-2",
-                    },
-                }}
-            />*/}
-
-            <div className='flex items-center gap-1'>
-                <div className='block md:hidden'>
-                    <SignedIn>
-                    <SignOutButton>
-                    <div className='flex text-light-3 cursor-pointer'>
-                        <Image
-                           src='/assets/logout.svg'
-                           alt='logout'
-                           width={24}
-                           height={24}
-                        />
-                    </div>
-                    </SignOutButton>
-                    </SignedIn>
+            <Bottombar />
+            <div className="flex gap-2">
+                <Link href={`/create-thread/`} className=" md:hidden">
+                    <Image
+                       src='/assets/create.svg'
+                        alt=""
+                        width={24}
+                        height={24}
+                        className=" w-6 h-6 bg-slate-400 rounded-full p-1 "
+                    />
+                </Link>
+                <Link href={`/activity`}>
+                    <Image
+                        src='/assets/bell.svg'
+                        alt=""
+                        width={24}
+                        height={24}
+                        className=" w-6 h-6 bg-slate-300 rounded-full p-0.5"
+                    />
+                </Link>
+            </div>
+            <div className="flex items-center gap-2 ">
+                <Link href={`/profile/${user?.id}`} className="">
+                    <img
+                        src={userInfo?.image}
+                        alt='logo'
+                        width={40}
+                        height={40}
+                        className='cursor-pointer w-9 h-9 rounded-full'
+                    />
+                </Link>
+                <div>
+                    <MobileNav />
                 </div>
-                
             </div>
         </nav>
+        </>
     )
 }
 

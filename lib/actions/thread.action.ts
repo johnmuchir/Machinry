@@ -1,6 +1,6 @@
 "use server";
 
-import { FilterQuery, SortOrder } from "mongoose";
+import mongoose, { FilterQuery, SortOrder } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { connectToDB } from "../moongose";
 import User from "../models/user.model";
@@ -268,4 +268,109 @@ export async function addCommentToThread(
   }
 }
 
+export async function unlikeThread(
+  userId: string ,
+  threadId: any
+) {
+  await connectToDB();
+
+  try {
+
+    let actualUserId;
+
+    if (typeof userId === 'object') {
+      const { id: extractedId } = userId || {};
+      if (extractedId) {
+        console.log("extractedId:", extractedId);
+        actualUserId = extractedId;
+      } else {
+        throw new Error("Missing user ID in request");
+      }
+    } else {
+      actualUserId = userId;
+    }
+
+    const convertedUserId = new mongoose.Types.ObjectId(actualUserId);
+
+    const thread = await Thread.findById({_id: threadId}).exec();
+    console.log('Thread:', thread);
+
+    if (!thread) {
+      throw new Error("Invalid threadId");
+    }
+
+    await thread.updateOne({ $pull: { likes: convertedUserId } });
+    return { message: "Thread unliked successfully" };
+  } catch (error) {
+    console.error("An error occurred while unliking thread:", error);
+    throw new Error("Failed to unlike thread");
+  }
+}
+
+
+export async function likeThread(
+  userId: string,
+  threadId: string,
+) {
+  await connectToDB();
+
+  try {
+    let actualUserId;
+
+    if (typeof userId === 'object') {
+      const { id: extractedId } = userId || {};
+      if (extractedId) {
+        console.log("extractedId:", extractedId);
+        actualUserId = extractedId;
+      } else {
+        throw new Error("Missing user ID in request");
+      }
+    } else {
+      actualUserId = userId;
+    }
+
+    const convertedUserId = new mongoose.Types.ObjectId(actualUserId);
+
+    const thread = await Thread.findById({_id: threadId}).exec();
+    console.log('Thread:', thread);
+
+    if (!thread) {
+      throw new Error("Invalid threadId");
+    }
+
+    await thread.updateOne({ $addToSet: { likes: convertedUserId } });
+    return { message: "Thread liked successfully" };
+  } catch (error) {
+    console.error("An error occurred while liking thread:", error);
+    if (error) {
+      throw new Error("Invalid user ID format");
+    } else {
+      throw new Error("Failed to like thread");
+    }
+  }
+}
+
+
+
+export async function getLikes(
+  threadId: string
+) {
+  await connectToDB();
+
+  try {
+
+    const thread = await Thread.findById(threadId);
+
+    if (!thread) {
+      return { error: "Thread not found" };
+    }
+
+    const likes = thread.likes;
+    return likes;
+    
+  } catch (error) {
+    console.error("An error occurred while fetching likes:", error);
+    throw new Error("Failed to fetch likes");
+  }
+}
 

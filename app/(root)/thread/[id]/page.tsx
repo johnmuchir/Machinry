@@ -26,16 +26,15 @@ const Page = async ({ params }: { params: { id: string }}) => {
                     currentUserId={user?.id || ""}
                     parentId={thread?.parentId}
                     content={thread?.text}
-                    images={thread?.images}  
+                    images={thread?.images}
                     author={thread?.author}
                     community={thread?.community}
                     createdAt={thread?.createdAt}
-                    comments={thread?.children} 
-                    likes={thread?.children} 
-                                
+                    comments={thread?.children}                               
                 />
             </div>
-            <div className="mt-3">
+
+            <div className="mt-3 bg-gray-300 rounded-full px-1">
                 <Comment
                     threadId={thread?.id}
                     currentUserImg={userInfo.image}
@@ -43,7 +42,7 @@ const Page = async ({ params }: { params: { id: string }}) => {
                 />
             </div>
         
-            <div className="mt-7">
+            <div className="mt-7 ">
                 {thread?.children.map((childItem: any) => (
                     <ThreadCard 
                         key={childItem._id}
@@ -51,13 +50,12 @@ const Page = async ({ params }: { params: { id: string }}) => {
                         currentUserId={childItem?.id || ""}
                         parentId={childItem.parentId}
                         content={childItem.text}
-                        images={childItem.images}  
+                        images={childItem.images}
                         author={childItem.author}
                         community={childItem.community}
                         createdAt={childItem.createdAt}
                         comments={childItem.children}
-                        isComment   
-                        likes={childItem.children}
+                        isComment
                     />
                 ))}
             </div>

@@ -25,10 +25,10 @@ async function Home({
 
   return (
     <>
-      
+
       <h1 className='head-text text-left'></h1>
       <ThreadSearchbar routeType="" />
-      <section className='mt-2 flex flex-col gap-4'>
+      <section className='mt-2 flex flex-col gap-3'>
         {result.posts.length === 0 ? (
           <p className='no-result'>No posts found</p>
         ) : (
@@ -45,8 +45,6 @@ async function Home({
                 community={post.community}
                 createdAt={post.createdAt}
                 comments={post.children}
-                likes={post.children}
-                
               />
             ))}
           </>

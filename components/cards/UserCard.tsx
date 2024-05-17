@@ -1,7 +1,5 @@
 "use client"
 
-import Image from "next/image";
-import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -12,7 +10,7 @@ interface Props {
     personType: string;
 }
 
-const UserCard = ({ id, name, username, imgUrl, personType}: Props) => {
+const UserCard = ({id, name, username, imgUrl, personType }: Props) => {
     const router = useRouter();
     return (
         <article className="user-card">
@@ -25,13 +23,19 @@ const UserCard = ({ id, name, username, imgUrl, personType}: Props) => {
                     className="rounded-full w-10 h-10 "
                 />
                 <div className="flex-1 text-ellipsis">
-                    <h4 className=" text-small-semibold text-light-1">{name}</h4>
-                    <p className="text-small-regular text-gray-1">@{username}1</p>
+                    <h4 className=" text-small-semibold">{name}</h4>
+                    <p className="text-small-regular text-gray-1">@{username}</p>
                 </div>
             </div>
-            <Button className="user-card_btn" onClick={() => router.push(`/profile/${id}`)}>
+            <button
+                className=' text-small-regular bg-cyan-400 p-1 rounded-full'
+                onClick={() => {
+                router.push(`/profile/${id}`);
+          
+                }}
+            >
                 View
-            </Button>
+            </button>
         </article>
     )
 }

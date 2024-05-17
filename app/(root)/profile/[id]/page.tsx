@@ -1,15 +1,11 @@
-
 import Image from "next/image";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-
 import { profileTabs } from "@/constants";
-
 import ThreadsTab from "@/components/shared/ThreadsTab";
 import ProfileHeader from "@/components/shared/ProfileHeader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { fetchUser } from "@/lib/actions/user.action";
-
 
 
 async function Page({ params }: { params: { id: string } }) {
@@ -45,7 +41,7 @@ async function Page({ params }: { params: { id: string } }) {
                 <p className='max-sm:hidden'>{tab.label}</p>
 
                 {tab.label === "Threads" && (
-                  <p className='ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2'>
+                  <p className='ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium'>
                     {userInfo.threads.length}
                   </p>
                 )}
@@ -56,7 +52,7 @@ async function Page({ params }: { params: { id: string } }) {
             <TabsContent
               key={`content-${tab.label}`}
               value={tab.value}
-              className='w-full text-light-1'
+              className='w-full'
             >
               {/* @ts-ignore */}
               <ThreadsTab

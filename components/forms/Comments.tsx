@@ -59,7 +59,7 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
           render={({ field }) => (
             <FormItem className='flex w-full items-center gap-2'>
               <FormLabel>
-                <img
+                <Image
                   src={currentUserImg}
                   alt='current_user'
                   width={40}
@@ -67,11 +67,11 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
                   className='rounded-full h-10 w-11 '
                 />
               </FormLabel>
-              <FormControl className='border-none bg-dark-4 px-3 '>
+              <FormControl className='border-none bg-gray-300 px-3 '>
                 <textarea
                   {...field}
-                  placeholder='Comment...'
-                  className=' w-full text-[14px] text-light-1 outline-none rounded-full'
+                  placeholder='Write your comment...'
+                  className=' w-full text-[14px] outline-none rounded-full'
                   style={{ overflow: 'hidden', }} 
                 />
               </FormControl>
@@ -79,8 +79,8 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
           )}
         />
   
-        <button type='submit' className='comment-form_bt rounded-full bg-blue text-[12px] p-2'>
-          Submit
+        <button type='submit' className='mt-2'>
+          <Image src='/assets/send.svg' alt="send" width={24} height={24}/>
         </button>
       </form>
     </Form>

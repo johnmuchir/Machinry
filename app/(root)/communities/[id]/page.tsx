@@ -65,12 +65,9 @@ async function Page({ params }: { params: { id: string } }) {
               {communityDetails.members.map((member: any) => (
                 <UserCard
                   key={member.id}
-                  id={member.id}
                   name={member.name}
                   username={member.username}
-                  imgUrl={member.image}
-                  personType='User'
-                />
+                  imgUrl={member.image} id={""} personType={""}                />
               ))}
             </section>
           </TabsContent>

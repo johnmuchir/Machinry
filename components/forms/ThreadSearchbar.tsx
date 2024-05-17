@@ -28,7 +28,7 @@ function ThreadSearchbar({ routeType }: Props) {
   }, [search, routeType]);
 
   return (
-    <div className='searchbar rounded-full p-0 mb-7'>
+    <div className='searchbar rounded-full drop-shadow-lg shadow-purple-300 w-full mb-4'>
       
       <Input
         id='text'
@@ -37,7 +37,7 @@ function ThreadSearchbar({ routeType }: Props) {
         placeholder={`${
             routeType !== "/search" ? "Search Machinary, Spares, Manuals " : "Search creators"
         }`}
-        className='no-focus bg-dark-4 text-light-1 rounded-full border-none'
+        className='no-focus bg-gray-300 text-light-1 rounded-full border-none w-full'
       />
     </div>
   );

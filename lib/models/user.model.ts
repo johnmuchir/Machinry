@@ -16,6 +16,20 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    followers: {
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+        default: [],
+      },
+      following: {
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+        default: [],
+    },
+    friends: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        }
+    ],
     communities: [
         {
             type: mongoose.Schema.Types.ObjectId,

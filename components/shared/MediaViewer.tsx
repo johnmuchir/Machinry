@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import MediaModal from '../forms/MediaModal';
+import Image from 'next/image';
 
 interface MediaViewerProps {
   images: string[];
@@ -77,7 +78,7 @@ const MediaViewer: React.FC<MediaViewerProps> = ({ images }) => {
                 </div>
               ) : (
                 <div onClick={() => openMediaOverlay(index)} className='' >
-                  <img src={media} alt="" className="rounded-lg cursor-pointer h-auto w-full " />
+                  <Image src={media} alt="" width={1000} height={1000} className="rounded-lg cursor-pointer h-auto w-full " />
                 </div>
               )}
             </div>

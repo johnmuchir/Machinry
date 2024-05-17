@@ -5,12 +5,12 @@
 @layer components {
   /* main */
   .main-container {
-    @apply flex min-h-screen flex-1 flex-col items-center bg-dark-1 px-1 pb-10 pt-28 max-md:pb-32 sm:px-28;
+    @apply flex min-h-screen flex-1 flex-col items-center px-1 pb-10 pt-20 max-md:pb-32 sm:px-28;
   }
 
   /* Head Text */
   .head-text {
-    @apply text-heading2-bold text-light-1;
+    @apply text-heading2-bold;
   }
 
   /* Activity */
@@ -25,7 +25,7 @@
 
   /* Community Card */
   .community-card {
-    @apply w-full rounded-lg bg-dark-3 px-4 py-5 sm:w-96;
+    @apply w-full rounded-lg bg-dark-2 px-4 py-5 sm:w-96;
   }
 
   .community-card_btn {
@@ -39,7 +39,7 @@
 
   /* User card */
   .user-card {
-    @apply flex  justify-between gap-4 max-xs:rounded-xl max-xs:bg-dark-3 xs:flex-row xs:items-center;
+    @apply flex  justify-between gap-4 max-xs:rounded-xl xs:flex-row xs:items-center;
   }
 
   .user-card_avatar {
@@ -51,19 +51,19 @@
   }
 
   .searchbar {
-    @apply flex gap-1 rounded-lg bg-dark-3 px-4 py-2;
+    @apply flex gap-1 rounded-lg  px-2 ;
   }
 
   .searchbar_input {
-    @apply border-none bg-dark-3 text-base-regular text-light-4 outline-none !important;
+    @apply border-none bg-slate-300 text-base-regular outline-none !important;
   }
 
   .topbar {
-    @apply fixed top-0 z-30 flex w-full items-center justify-between bg-dark-2 px-6 py-3;
+    @apply fixed bg-slate-100 top-0 z-30 flex w-full gap-5 items-center justify-between px-6 py-3;
   }
 
   .bottombar {
-    @apply fixed bottom-0 z-10 w-full rounded-t-3xl bg-glassmorphism p-4 backdrop-blur-lg xs:px-7 md:hidden;
+    @apply fixed bottom-0 z-10 w-full rounded-t-3xl bg-glassmorphism p-2 backdrop-blur-lg xs:px-7 md:hidden;
   }
 
   .bottombar_container {
@@ -71,15 +71,15 @@
   }
 
   .bottombar_link {
-    @apply relative flex flex-col items-center gap-2 rounded-lg p-2 sm:flex-1 sm:px-2 sm:py-2.5;
+    @apply relative flex flex-col items-center gap-0 rounded-lg sm:flex-1 sm:px-1 sm:py-1 bg-gray-400;
   }
 
   .leftsidebar {
-    @apply sticky left-0 top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto border-r border-r-dark-4 bg-dark-2 pb-5 pt-28 max-md:hidden;
+    @apply sticky left-0 top-0 z-20 bg-slate-100 flex h-screen w-fit flex-col justify-between overflow-auto border-r-4 border-r-gray-300 pb-5 pt-20 max-md:hidden;
   }
 
   .leftsidebar_link {
-    @apply relative flex justify-start gap-4 rounded-lg p-4;
+    @apply relative flex justify-start gap-4 rounded-lg bg-slate-300 p-4;
   }
 
   .pagination {
@@ -87,7 +87,7 @@
   }
 
   .rightsidebar {
-    @apply sticky right-0 top-0 z-20 flex h-screen w-fit flex-col justify-between gap-12 overflow-auto border-l border-l-dark-4 bg-dark-2 px-10 pb-6 pt-28 max-xl:hidden;
+    @apply sticky right-0 top-0 z-20 bg-slate-100 flex h-screen w-fit flex-col justify-between gap-12 overflow-auto border-4 border-l-gray-300 px-10 pb-6 pt-20 max-xl:hidden;
   }
 }
 
@@ -144,7 +144,7 @@
 }
 
 .account-form_image-input {
-  @apply cursor-pointer border-none bg-transparent outline-none file:text-blue !important;
+  @apply cursor-pointer border-none bg-dark-6 outline-none file:text-blue !important;
 }
 
 .account-form_input {

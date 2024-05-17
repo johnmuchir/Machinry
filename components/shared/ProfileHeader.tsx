@@ -17,7 +17,7 @@ const ProfileHeader = ({ accountId, authUserId, name, username, imgUrl, bio, typ
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <div className='relative h-15 object-cover'>
-                        <img 
+                        <img
                             src={imgUrl}
                             alt="image"
                             width={40}
@@ -26,7 +26,7 @@ const ProfileHeader = ({ accountId, authUserId, name, username, imgUrl, bio, typ
                         />
                     </div>
                     <div className='flex-1'>
-                        <h2 className='text-left text-small-semibold text-light-1'>
+                        <h2 className='text-left text-small-semibold'>
                             {name}
                         </h2>
                         <p className='text-small-regular text-gray-1'>@{username}</p>
@@ -47,8 +47,8 @@ const ProfileHeader = ({ accountId, authUserId, name, username, imgUrl, bio, typ
                     </Link>
                 )}
             </div>
-            <p className='mt-3 max-w-lg text-base-regular text-light-2'>{bio}</p>
-            <div className='mt-3 h-0.5 w-full bg-dark-3' />
+            <p className='mt-3 max-w-lg text-base-regular'>{bio}</p>
+            <hr className='mt-3 h-0.5 w-full bg-dark-6' />
 
         </div>
     )

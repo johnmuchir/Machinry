@@ -1,12 +1,11 @@
 import { redirect } from "next/navigation";
-
 import { fetchCommunityPosts } from "@/lib/actions/community.actions";
-
 import ThreadCard from "../cards/ThreadCard";
 import { fetchUserPosts } from "@/lib/actions/user.action";
 
 interface Result {
   name: string;
+  bio: string;
   image: string;
   id: string;
   threads: {
@@ -15,6 +14,7 @@ interface Result {
     images:string[];
     parentId: string | null;
     author: {
+      bio: string;
       name: string;
       image: string;
       id: string;
@@ -53,34 +53,30 @@ async function ThreadsTab({ currentUserId, accountId, accountType }: Props) {
   }
 
   return (
-    <section className='mt-5 flex flex-col gap-4'>
+    <section className='mt-5 flex flex-col gap-3'>
       {result.threads
        .reverse()
        .map((thread) => (
         <ThreadCard
-          key={thread._id}
-          id={thread._id}
-          currentUserId={currentUserId}
-          parentId={thread.parentId}
-          content={thread.text}
-          images={thread.images}
-          author={
-            accountType === "User"
-              ? { name: result.name, image: result.image, id: result.id }
-              : {
-                  name: thread.author.name,
-                  image: thread.author.image,
-                  id: thread.author.id,
-                }
-          }
-          community={
-            accountType === "Community"
-              ? { name: result.name, id: result.id, image: result.image }
-              : thread.community
-          }
-          createdAt={thread.createdAt}
-          comments={thread.children}
-          likes={[]}
+           key={thread._id}
+           id={thread._id}
+           currentUserId={currentUserId}
+           parentId={thread.parentId}
+           content={thread.text}
+           images={thread.images}
+           author={accountType === "User"
+             ? { name: result.name, bio: result.bio, image: result.image, id: result.id }
+             : {
+               name: thread.author.name,
+               bio: thread.author.bio,
+               image: thread.author.image,
+               id: thread.author.id,
+             }}
+           community={accountType === "Community"
+             ? { name: result.name, id: result.id, image: result.image }
+             : thread.community}
+           createdAt={thread.createdAt}
+           comments={thread.children}
         />
       ))}
     </section>

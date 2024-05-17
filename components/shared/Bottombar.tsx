@@ -11,8 +11,8 @@ function Bottombar() {
     const pathname = usePathname();
   
     return (
-      <section className='bottombar'>
-        <div className='bottombar_container'>
+      <section className='max-md:hidden'>
+        <div className='flex items-center justify-between gap-3 xs:gap-5'>
           {sidebarLinks.map((link) => {
             const isActive =
               (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
@@ -26,12 +26,12 @@ function Bottombar() {
                 <Image
                   src={link.imgURL}
                   alt={link.label}
-                  width={16}
-                  height={16}
+                  width={20}
+                  height={20}
                   className="object-contain"
                 />
   
-                <p className="text-[9px] text-light-1 max-sm:hidden">
+                <p className="text-[9px] max-sm:hidden">
                   {link.label.split(/\s+/)[0]}
                 </p>
               </Link>

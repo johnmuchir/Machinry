@@ -1,6 +1,6 @@
 "use server";
 
-import { FilterQuery, SortOrder } from "mongoose";
+import mongoose, { FilterQuery, SortOrder } from "mongoose";
 import { revalidatePath } from "next/cache";
 
 import Community from "../models/community.model";
@@ -180,5 +180,101 @@ export async function getActivity(userId: string) {
   } catch (error) {
     console.error("Error fetching replies: ", error);
     throw error;
+  }
+}
+
+export async function addFriend(userId: string, followId: string) {
+  try {
+    await connectToDB()
+    console.log("Adding friend. User ID:", userId, "Friend ID (before conversion):", followId);
+
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // Convert friendId string to ObjectId
+    const friendObjectId = new mongoose.Types.ObjectId(followId);
+    console.log("Friend ID (after conversion):", friendObjectId);
+
+    // Add the friend to the user's friends list
+    user.friends.push(friendObjectId);
+    await user.save();
+
+    console.log("Friend added successfully");
+
+    return { message: "Friend added successfully" };
+  } catch (error) {
+    console.error("Error adding friend:", error);
+    throw new Error("Failed to add friend");
+  }
+}
+
+
+export async function removeFriend(userId: string, friendId: string) {
+  try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+          throw new Error("User not found");
+      }
+
+      // Remove the friend from the user's friends list
+      user.friends = user.friends.filter((id: { toString: () => string; }) => id.toString() !== friendId);
+      await user.save();
+
+      return { message: "Friend removed successfully" };
+  } catch (error) {
+      console.error("Error removing friend:", error);
+      throw new Error("Failed to remove friend");
+  }
+}
+
+export async function getFriends(userId: string) {
+  try {
+      const user = await User.findOne({id: userId}).populate("friends");
+
+      if (!user) {
+          throw new Error("User not found");
+      }
+
+      return user.friends;
+  } catch (error) {
+      console.error("Error getting friends:", error);
+      throw new Error("Failed to get friends");
+  }
+}
+
+
+export async function addFollow(userId: string, followId: string) {
+  try {
+    await connectToDB()
+
+    const user = await User.findOne({ id: userId })//populate(" followers following")
+    const personToFollow = await User.findOne({ id: followId })//populate("followers following")
+    
+    if (!user || !personToFollow) {
+      // Handle the case where either the user or person to follow is not found
+      throw new Error("User or person to follow not found");
+    }
+
+    const isFollowing = user?.following.find((item: { id: { toString: () => string; }; }) => item.id.toString() === followId)
+
+    if (isFollowing) {
+      user.following = user.following.filter((item: { id: { toString: () => string; }; }) => item.id.toString() !== followId)
+      personToFollow.followers = personToFollow.followers.filter((item: { id: { toString: () => any; }; }) => item.id.toString() !== user.id.toString())
+    } else {
+      user.following.push(personToFollow)
+      personToFollow.followers.push(user)
+    }
+
+    await user.save()
+    await personToFollow.save()
+
+    return new Response(JSON.stringify(user), { status: 200 })
+  } catch (err) {
+    console.log(err)
+    return new Response("Failed to follow/unfollow user", { status: 500 })
   }
 }

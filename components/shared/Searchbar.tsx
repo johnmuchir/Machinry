@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
 import { Input } from "../ui/input";
 
 interface Props {
@@ -28,15 +26,15 @@ function Searchbar({ routeType }: Props) {
   }, [search, routeType]);
 
   return (
-    <div className='text-light-2'>
+    <div className=''>
       <Input
         id='text'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder={`${
-          routeType !== "/search" ? "Search AI ,,, comming soon" : "Search creators"
+          routeType !== "/search" ? "Search" : "Search creators"
         }`}
-        className='no-focus searchbar_input rounded-full text-light-1 '
+        className='no-focus searchbar_input rounded-full '
       />
     </div>
   );

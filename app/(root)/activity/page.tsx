@@ -25,14 +25,14 @@ async function Page() {
                         {activity.map((activity) => (
                             <Link key={activity._id} href={`/thread/${activity.parentId}`}>
                                 <article className="activity-card">
-                                    <img 
+                                    <Image
                                         src={activity.author.image}
                                         alt="Profile Picture"
                                         width={20}
                                         height={20}
                                         className="rounded-full w-7 h-7 "
                                     />
-                                    <p className="!text-small-regular text-light-1">
+                                    <p className="!text-small-regular">
                                         <span className="mr-1 text-primary-500">
                                             {activity.author.name}
                                         </span>{" "}

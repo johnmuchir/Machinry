@@ -23,12 +23,7 @@ export function formatDateString(dateString: string) {
   const date = new Date(dateString);
   const formattedDate = date.toLocaleDateString(undefined, options);
 
-  const time = date.toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "2-digit",
-  });
-
-  return `${time} - ${formattedDate}`;
+  return `${formattedDate}`;
 }
 
 // created by chatgpt
@@ -40,4 +35,21 @@ export function formatThreadCount(count: number): string {
     const threadWord = count === 1 ? "Thread" : "Threads";
     return `${threadCount} ${threadWord}`;
   }
+}
+
+// chat
+
+export function formattedText(inputText: string) {
+  return inputText
+    .replace(/\n+/g, " ") // Replace multiple consecutive new lines with a single space
+    .replace(/(\w) - (\w)/g, "$1$2") // Join hyphenated words together
+    .replace(/\s+/g, " "); // Replace multiple consecutive spaces with a single space
+}
+
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function absoluteUrl(path: string) {
+  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`
 }

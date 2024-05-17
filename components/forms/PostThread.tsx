@@ -32,6 +32,7 @@ function PostThread({ userId }: Props) {
   const pathname = usePathname();
   const { startUpload } = useUploadThing("mediaPost");
   const { organization } = useOrganization();
+  const [loading,setLoading] = useState(false)
   const [files, setFiles] = useState<File[]>([]);
   const [filePreviews, setFilePreviews] = useState<string[]>([]);
   const form = useForm<z.infer<typeof ThreadValidation>>({
@@ -55,7 +56,7 @@ function PostThread({ userId }: Props) {
         values.images = imgRes.map((res) => res.url);
       }
     }
-
+    
     await createThread({
       text: values.thread,
       images: values.images || [],
@@ -63,7 +64,7 @@ function PostThread({ userId }: Props) {
       communityId: null,
       path: pathname,
     });
-
+    
     console.log("Form Values:", values);
 
     console.log(values.thread);
@@ -76,6 +77,7 @@ function PostThread({ userId }: Props) {
     fieldChange: (value: string) => void
   ) => {
     e.preventDefault();
+    setLoading(true)
 
     const fileReader = new FileReader();
 
@@ -93,7 +95,9 @@ function PostThread({ userId }: Props) {
 
         fileReader.readAsDataURL(file);
       });
+      
     }
+    setLoading(false)
   };
 
   return (
@@ -113,7 +117,7 @@ function PostThread({ userId }: Props) {
               <FormLabel className="text-base-semibold text-light-1">
                 Create Post
               </FormLabel>
-              <FormControl className=" no-focus border border-dark-5 bg-dark-4 text-light-1">
+              <FormControl className=" no-focus border border-dark-5 text-light-1">
                 <Input
                   type="file"
                   accept="image/*, video/*, application/pdf"
@@ -143,7 +147,7 @@ function PostThread({ userId }: Props) {
           render={({ field }) => (
             <FormItem className="flex w-full flex-col gap-3">
               <FormLabel className="text-base-semibold text-light-1"></FormLabel>
-              <FormControl className="no-focus border border-dark-5 bg-dark-4 text-light-1">
+              <FormControl className="no-focus border border-dark-5 bg-dark-6 text-light-1">
                 <Textarea rows={6} {...field} placeholder="Write here to post" />
               </FormControl>
               <FormMessage />
@@ -158,7 +162,14 @@ function PostThread({ userId }: Props) {
         >
           {form.formState.isSubmitting ? 'Submitting...' : 'Submit'}
         </button>
-
+         {/*loading state */}
+         {
+            loading && (
+              <div className='fixed bg-slate-200 bg-opacity-60 top-0 right-0 left-0 bottom-0 w-full h-full flex justify-center items-center'>
+                <p className='bg-white p-4'>Loading....</p>
+              </div>
+            )
+          }
       </form>
     </Form>
   );
